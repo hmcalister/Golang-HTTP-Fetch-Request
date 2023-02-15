@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <script>
+        async function get_content() {
+            let response = await fetch("http://127.0.0.1:8080/content");
+            let data = await response.json();
+            console.log(data);
+
+            let content_div = document.getElementById("content_div");
+            Object.keys(data).forEach(function(key) {
+                let container = document.createElement("div");
+                container.classList.add("grid");
+
+                let label = document.createElement("h2");
+                label.innerHTML = key;
+
+                let value = document.createElement("p");
+                value.innerHTML = data[key];
+
+                container.appendChild(label);
+                container.appendChild(value);
+                content_div.appendChild(container);
+            })
+        }
+
+    </script>
+</head>
+
+<body>
+    <main class="container">
+        <h1>HELLO WORLD</h1>
+    
+        <button onclick="get_content()">Get Content</button>
+    
+        <div id="content_div"></div>
+
+    </main>
+</body>
+
+</html>
